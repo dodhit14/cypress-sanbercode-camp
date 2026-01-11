@@ -77,8 +77,8 @@ describe('Login OrangeHRM - Security & Exception', () => {
     // 8. Akun diblokir
     it('User login menggunakan akun diblokir', () => {
         cy.intercept('POST', '**/auth/validate', {
-        statusCode: 403,
-        body: { message: 'Account disabled' }
+            statusCode: 403,
+            body: { message: 'Account disabled' }
         }).as('blocked')
 
         cy.get('input[name="username"]').type('blockedUser')
@@ -95,7 +95,7 @@ describe('Login OrangeHRM - Security & Exception', () => {
         cy.intercept('POST', '**/auth/validate', {
             statusCode: 429,
             body: {
-            message: 'Your account has been temporarily blocked'
+                message: 'Your account has been temporarily blocked'
             }
         }).as('rateLimit')
 
