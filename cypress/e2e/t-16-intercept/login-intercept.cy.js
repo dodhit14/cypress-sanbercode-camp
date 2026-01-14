@@ -129,6 +129,10 @@ describe('Login OrangeHRM Page Automation', () => {
     });
 
     describe('Account Status Validation', () => {
+        /****************************************
+         * TS-LOGIN-007
+         * Login Failed (Negative / Bussiness Rule Validation)
+         ****************************************/
         it('TS-LOGIN-007 - User login menggunakan akun diblokir', () => {
             cy.intercept('POST', '**/auth/validate', {
                 statusCode: 403,
@@ -146,6 +150,10 @@ describe('Login OrangeHRM Page Automation', () => {
     });
 
     describe('Security Validation', () => {
+        /****************************************
+         * TS-LOGIN-008
+         * Login Failed (Security / Rate Limit )
+         ****************************************/
         it('TS-LOGIN-008 - User melakukan login berulang kali dengan kredential salah', () => {
             let attempt = 0
 
