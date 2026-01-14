@@ -26,9 +26,24 @@ class LoginPage {
      */
     fillUsername(username) {
         this.usernameField
-            .should('be.visible', { timeout: 10000 })
-            .clear()
-            .type(username);
+            .should('be.visible')
+            .clear();
+        
+            if (username) {
+                this.usernameField
+                    .type(username)
+            }
+    }
+
+    fillPassword(password) {
+        this.passwordField
+            .should('be.visible')
+            .clear();
+
+        if (password) {
+            this.passwordField
+            .type(password);
+        }
     }
 
     /**
@@ -36,13 +51,6 @@ class LoginPage {
      * Method login (composite action)
      * 
      */
-    fillPassword(password) {
-        this.passwordField
-            .should('be.visible', { timeout: 10000 })
-            .clear()
-            .type(password);
-    }
-
     submitLogin() {
         this.loginButton
             .should('be.enabled')
