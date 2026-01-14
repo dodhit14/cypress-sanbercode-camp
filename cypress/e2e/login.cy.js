@@ -81,12 +81,12 @@ describe('Login OrangeHRM - Security & Exception', () => {
             body: { message: 'Account disabled' }
         }).as('blocked')
 
-        cy.get('input[name="username"]').type('blockedUser')
-        cy.get('input[name="password"]').type('admin123')
-        cy.get('button[type="submit"]').click()
+        cy.get('input[name="username"]').type('blockedUser');
+        cy.get('input[name="password"]').type('admin123');
+        cy.get('button[type="submit"]').click();
 
-        cy.wait('@blocked')
-        cy.contains('Account disabled').should('be.visible')
+        cy.wait('@blocked');
+        cy.contains('Account disabled').should('be.visible');
     });
 
     // 9. blokir sementara aku login berulang
