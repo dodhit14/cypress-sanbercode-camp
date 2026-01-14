@@ -3,7 +3,7 @@ describe('Login OrangeHRM Page Automation', () => {
     beforeEach(() => {
         cy.clearCookies();
         cy.clearLocalStorage();
-        cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        cy.visit('/web/index.php/auth/login');
 
         // Pastikan halaman login siap
         cy.get('input[name="username"]', { timeout: 10000 })

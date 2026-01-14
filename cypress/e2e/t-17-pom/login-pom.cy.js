@@ -10,6 +10,10 @@ describe('Login OrangeHRM Page Automation', () => {
         LoginPage.visit();
     });
 
+    it('Buka halaman login', () => {
+        cy.url().should('include', 'orangehrmlive.com')
+    })
+
     describe('Credential Validation', () => {
         /****************************************
          * TS-LOGIN-001
@@ -32,19 +36,22 @@ describe('Login OrangeHRM Page Automation', () => {
          * TS-LOGIN-002
          * Login failed (Negative Test | Mock)
          ****************************************/
-        // it('TS-LOGIN-002 - User login dengan username berformat email', () => {
-        //     cy.intercept('POST', '**/auth/validate', {
-        //         statusCode: 401,
-        //         body: {
-        //             message : 'Invalid username format'
-        //         }
-        //     }).as('login');
+        it('TS-LOGIN-002 - User login dengan username berformat email', () => {
+            cy.intercept('POST', '**/auth/validate', {
+                statusCode: 401,
+                body: {
+                    message : 'Invalid username format'
+                }
+            }).as('login');
             
-        //     .login('admin@mail.com', 'admin123');
+            LoginPage.login('admin@mail.com', 'admin123');
 
-        //     cy.wait('@login');
+            cy.wait('@login').then((interception) => {
+            expect(interception.response.statusCode).to.eq(401);
+            expect(interception.response.body.message).to.eq('Invalid username format');
+        });
 
-        //     cy.contains('Invalid').should('be.visible');
-        // });
-    })
+            cy.contains('Invalid').should('be.visible');
+        });
+    });
 });

@@ -5,7 +5,7 @@ describe('Login OrangeHRM - Normal Flow', () => {
      * membuat url yg reusable dan dijalankan setiap kali sebelum it
      */
     beforeEach(() => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+        cy.visit('/web/index.php/auth/login')
     })
 
     // 1. cek halaman login
@@ -71,7 +71,7 @@ describe('Login OrangeHRM - Normal Flow', () => {
 describe('Login OrangeHRM - Security & Exception', () => {
 
     beforeEach(() => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+        cy.visit('/web/index.php/auth/login')
     })
 
     // 8. Akun diblokir
