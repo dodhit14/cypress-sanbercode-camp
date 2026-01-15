@@ -1,4 +1,7 @@
-import { validUser, invalidUsers } from "../../fixtures/api-data/userData";
+import { 
+    validUser, 
+    invalidUser
+} from "../../fixtures/api-data/userData";
 
 describe('Login Api - ReqressIn', () => {
 
@@ -28,7 +31,7 @@ describe('Login Api - ReqressIn', () => {
      * url : https://reqres.in/api/login
      */
     it('TS-LOGIN-002 - Failed Login (UnknownEmail)', function() {
-        cy.apiRequest('POST', '/login', invalidUsers)
+        cy.apiRequest('POST', '/login', invalidUser)
             .then((res) => {
                 // Status code
                 expect(res.status).to.eq(400);

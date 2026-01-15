@@ -13,6 +13,7 @@ Cypress.Commands.add('apiRequest', (
       body, // payload request
       headers : {
         'x-api-key' : Cypress.env('apiKey'),
+        'Content-Type': 'application/json',
         ...headers // optional custom header
       },
       failOnStatusCode: false, //agar test tidak langsung gagal jika status code error (misal 400, 401, 404)
