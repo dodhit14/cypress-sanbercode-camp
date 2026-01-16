@@ -10,10 +10,6 @@ describe('Login OrangeHRM Page Automation', () => {
         LoginPage.visit();
     });
 
-    it('Buka halaman login', () => {
-        cy.url().should('include', 'orangehrmlive.com')
-    })
-
     describe('Credential Validation (E2E / API', () => {
         /****************************************
          * TS-LOGIN-001

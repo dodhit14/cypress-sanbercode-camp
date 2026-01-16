@@ -8,7 +8,8 @@ module.exports = defineConfig({
             apiUrl: 'https://reqres.in/api', // API Url
             apiKey: 'reqres_73e73f2ce9924218a497b6ea0df55bbd' //Api Key
         },
-
+        experimentalSessionAndOrigin: true,
+        
         setupNodeEvents(on, config) {
           // implement node event listeners here
         },

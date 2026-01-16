@@ -20,7 +20,6 @@ Cypress.Commands.add('apiRequest', (
     });
 });
 
-
 // Login State
 Cypress.Commands.add('login', (username, password) => {
     cy.get('input[name="username"]')
