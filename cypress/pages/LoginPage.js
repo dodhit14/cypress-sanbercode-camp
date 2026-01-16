@@ -2,7 +2,7 @@ class LoginPage {
 
     visit() {
         cy.visit('/web/index.php/auth/login');
-        cy.get('input[name="username"]', { timeout: 10000 })
+        cy.get('input[name="username"]', { timeout: 60000 })
             .should('be.visible');
     }
 

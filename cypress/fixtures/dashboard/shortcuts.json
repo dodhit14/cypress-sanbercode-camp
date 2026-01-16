@@ -1,0 +1,8 @@
+{
+    "data": {
+        "leave": true,
+        "time": true,
+        "recruitment": true,
+        "myInfo": true
+    }
+}

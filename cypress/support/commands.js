@@ -40,3 +40,28 @@ Cypress.Commands.add('visitLogin', () => {
     cy.visit('/web/index.php/auth/login')
     cy.get('input[name="username"]').should('be.visible')
 })
+
+// Login via api
+Cypress.Commands.add('loginAsAdmin', () => {
+  cy.session(
+    'admin-session', () => {
+        cy.visit('/web/index.php/auth/login')
+        cy.get('input[name="username"]').type('Admin')
+        cy.get('input[name="password"]').type('admin123')
+        cy.get('button[type="submit"]').click()
+        cy.url().should('include', '/dashboard')
+        
+      cy.url().should('include', 'web/index.php/dashboard/index')
+    },
+    { 
+      validate() {
+        cy.request({
+          url: '/web/index.php/dashboard/index',
+          failOnStatusCode: false
+        }).its('status').should('eq', 200)
+       },
+      cacheAcrossSpecs: true
+    }
+  )
+})
+

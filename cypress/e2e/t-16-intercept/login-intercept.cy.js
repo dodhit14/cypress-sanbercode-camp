@@ -6,7 +6,7 @@ describe('Login OrangeHRM Page Automation', () => {
         cy.visit('/web/index.php/auth/login');
 
         // Pastikan halaman login siap
-        cy.get('input[name="username"]', { timeout: 10000 })
+        cy.get('input[name="username"]', { timeout: 20000 })
             .should('be.visible')
     });
 

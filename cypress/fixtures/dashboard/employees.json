@@ -1,0 +1,14 @@
+{
+    "data": [
+        {
+        "empNumber": 1,
+        "firstName": "Paul",
+        "lastName": "Collings"
+        },
+        {
+        "empNumber": 2,
+        "firstName": "Linda",
+        "lastName": "Anderson"
+        }
+    ]
+}

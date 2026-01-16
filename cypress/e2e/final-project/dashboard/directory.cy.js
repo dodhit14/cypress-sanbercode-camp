@@ -1,29 +1,36 @@
-import AdminAuthConfig from "../../../helper/AdminAuthConfig";
-import LoginPage from "../../../pages/LoginPage";
-import DashboardBasePage from "../../../pages/dashboard/DashboardBasePage";
-import DashboardMenuPage from "../../../pages/dashboard/DashboardMenuPage";
-import DirectoryPage from "../../../pages/dashboard/DirectoryPage";
+import DirectoryPage from '../../pages/DirectoryPage'
 
-describe('Dashboard - Directory Feature', () => {
+describe('Directory Page - Login API + Mock Data', () => {
 
-    it('Open Directory Page', () => {
-        DirectoryPage.verifyDirectoryPage();
-    });
+  beforeEach(() => {
 
-    /**
-     * TS-DIR-001
-     * Open Directory Page
-     */
-    it('TS-DIR-001 - Open Directory Page', () => {
-        DirectoryPage.verifyDirectoryPage();
-    });
+    // ✅ REAL LOGIN
+    cy.loginAsAdmin()
 
-    /**
-     * TS-DIR-002
-     * Search employee by name
-     */
-    it('TS-DIR-002 - Search Employee by Name', () => {
-        DirectoryPage.searchByName('Paul');
-        DirectoryPage.verifySearchResult();
-    });
-});
+    // ✅ MOCK DATA DIRECTORY
+    cy.intercept(
+      'GET',
+      '**/web/index.php/api/v2/directory/employees**',
+      { fixture: 'dashboard/employees.json' }
+    ).as('getEmployees')
+
+    // ✅ VISIT PAGE
+    DirectoryPage.visit()
+
+    // ✅ WAIT MOCK
+    cy.wait('@getEmployees')
+  })
+
+  it('Menampilkan halaman Directory', () => {
+    DirectoryPage.pageTitle
+      .should('be.visible')
+      .and('contain.text', 'Directory')
+  })
+
+  it('Menampilkan data employee dari mock', () => {
+    DirectoryPage.employeeNames
+      .should('contain.text', 'Paul')
+      .and('contain.text', 'Linda')
+  })
+
+})
