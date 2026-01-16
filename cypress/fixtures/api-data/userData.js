@@ -16,11 +16,32 @@ export const invalidUser = {
  */
 export const validRegisterUser = {
     "email" : "george.bluth@reqres.in",
+    "role" : "Admin",
     "status" : "active",
     "password" : "password"
 }
 export const invalidRegisterUser = {
     "email" : "keshi@mail.com",
-    "status" : "active",
+    "role" : "cutomer",
+    "status" : "inactive",
     "password" : "password"
+}
+
+/**
+ * Data Users
+ */
+export const validCreateUser = {
+    "name" : "Dustin Tiffany",
+    "job" : "Content Creator",
+    "status" : "active"
+};
+
+export const validUpdateUser = {
+    "name" : "Dustin Tiffany",
+    "job" : "Actor",
+    "status" : "inActive"
+};
+
+export const validUpdateStatusUser = {
+    "status" : "inActive"
 }
