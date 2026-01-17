@@ -1,62 +1,21 @@
 class ForgotPasswordPage {
-    // URL
-    visit() {
-        cy.visit('/web/index.php/auth/requestPasswordResetCode', {
-            timeout: 60000,
-            onBeforeLoad(win) {
-                win.stop();
-            }
-        });
-        cy.get('input[name="username"]', { timeout: 10000 })
-            .should('be.visible');
+  get elements() {
+    return {
+      forgotPasswordLink: () => cy.get('.orangehrm-login-forgot-header'),
+      usernameInput: () => cy.get('input[name="username"]'),
+      resetButton: () => cy.get('button[type="submit"]'),
+      cancelButton: () => cy.get('button[type="button"]'),
+      successTitle: () => cy.get('.orangehrm-forgot-password-title'),
+      errorMessage: () => cy.get('.oxd-input-group__message')
     }
+  }
 
-    // Getter elements form
-    get usernameField() {
-        return cy.get('input[name="username"]');
-    }
+  visit() {
+    cy.visit('/web/index.php/auth/login', { timeout: 30000});
+    this.elements.forgotPasswordLink().click();
+    cy.url().should('include', '/auth/requestPasswordResetCode');
+    this.elements.usernameInput().should('be.visible');
+  }
+}
 
-    get resetButton() {
-        return cy.get('button[type="submit"]');
-    }
-
-    get cancelButton() {
-        return cy.contains('Cancel');
-    }
-
-    successMessage() {
-        return cy.get('.orangehrm-forgot-password-success')
-    }
-
-
-    // Action Element
-    fillUsername(username) {
-        this.usernameField
-            .should('be.visible')
-            .clear();
-        
-            if (username) {
-                this.usernameField
-                .type(username);
-            }
-    }
-
-    submitReset() {
-        this.resetButton
-        .should('be.enabled')
-        .click();
-    }
-
-    resetPassword(username) {
-        this.fillUsername(username);
-        this.submitReset();
-    }
-
-    assertResetSuccess() {
-        cy.get('.orangehrm-forgot-password-success')
-        .should('exist')
-        .and('contain', 'Reset Password link sent successfully');
-    }
-};
-
-export default new ForgotPasswordPage;
+export default new ForgotPasswordPage();

@@ -170,7 +170,7 @@ describe('Fitur Directory - OrangeHRM', () => {
     });
 
     DirectoryPage.elements.firstCard().click();
-    DirectoryPage.elements.detailEmployeeSidebar.should('be.visible');
-    DirectoryPage.elements.detailEmployeeCard.should('be.visible');
+    DirectoryPage.elements.detailEmployeeSidebar().should('be.visible');
+    DirectoryPage.elements.detailEmployeeCard().should('be.visible');
   })
 })

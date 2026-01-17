@@ -17,7 +17,7 @@ class DirectoryPage {
             cardProfilePicture: () => cy.get('.orangehrm-profile-picture'),
             cardSubtitle: () => cy.get('.orangehrm-directory-card-subtitle'),
 
-            firstCard: () => cy.get('.oxd-sheet').first(),
+            firstCard: () => this.elements.resultCard().first(),
             detailEmployeeSidebar: () => cy.get('.orangehrm-corporate-directory-sidebar'),
             detailEmployeeCard: () => cy.get('.orangehrm-directory-card')
         }
