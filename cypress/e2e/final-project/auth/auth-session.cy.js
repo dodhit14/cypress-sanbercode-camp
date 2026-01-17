@@ -6,7 +6,7 @@ describe('Auth Session Reuse Optimazion', () => {
        Cypress.session.clearAllSavedSessions()
     });
 
-    it('Step-001 - Generate Session Baru (First Login) ', () => {
+    it('TS-SESSION-001 - Generate Session Baru (First Login) ', () => {
       cy.intercept('POST', '**/auth/validate').as('loginRequest')
       
       cy.loginAsAdmin()
@@ -17,7 +17,7 @@ describe('Auth Session Reuse Optimazion', () => {
       cy.getCookie('orangehrm').should('exist');
     });
 
-    it('Step-002 - Reuse Session Tanpa Login Request', () => {
+    it('TS-SESSION-002 - Reuse Session Tanpa Login Request', () => {
       cy.intercept('POST', '**/auth/validate').as('loginRequestSecond')
       
       cy.loginAsAdmin()
@@ -25,6 +25,17 @@ describe('Auth Session Reuse Optimazion', () => {
 
       // Cek request login tidak boleh terpanggil lagi
       cy.get('@loginRequestSecond.all').should('have.length', 0)
+
+      // Verifikasi user tetap berada didashboard
+      cy.url().should('include', '/dashboard/index')
+      cy.get('.orangehrm-dashboard-grid').should('be.visible')
+    });
+
+    it('TS-SESSION-003 - Login Ulang Otomatis Setelah Session Habis', () => {
+      cy.clearCookie('orangehrm');
+      
+      cy.loginAsAdmin()
+      cy.visit('/web/index.php/dashboard/index')
 
       // Verifikasi user tetap berada didashboard
       cy.url().should('include', '/dashboard/index')

@@ -13,7 +13,7 @@ Cypress.Commands.add('apiRequest', (
       body, // payload request
       headers : {
         'x-api-key' : Cypress.env('apiKey'),
-        'Content-Type': 'application/json',
+        'content-type': 'application/json',
         ...headers // optional custom header
       },
       failOnStatusCode: false, //agar test tidak langsung gagal jika status code error (misal 400, 401, 404)
@@ -49,8 +49,8 @@ Cypress.Commands.add('loginAsAdmin', () => {
         cy.get('input[name="username"]').type('Admin')
         cy.get('input[name="password"]').type('admin123')
         cy.get('button[type="submit"]').click()
-        
-        cy.url().should('include', '/dashboard/url')
+
+        cy.url().should('include', '/dashboard')
     },
     { 
       validate() {
@@ -58,6 +58,8 @@ Cypress.Commands.add('loginAsAdmin', () => {
           url: '/web/index.php/dashboard/index',
           failOnStatusCode: false
         }).its('status').should('eq', 200)
+
+        cy.getCookie('orangehrm').should('exist')
        },
       cacheAcrossSpecs: true
     }
