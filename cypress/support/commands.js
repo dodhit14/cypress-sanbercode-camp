@@ -49,9 +49,8 @@ Cypress.Commands.add('loginAsAdmin', () => {
         cy.get('input[name="username"]').type('Admin')
         cy.get('input[name="password"]').type('admin123')
         cy.get('button[type="submit"]').click()
-        cy.url().should('include', '/dashboard')
         
-      cy.url().should('include', 'web/index.php/dashboard/index')
+        cy.url().should('include', '/dashboard/url')
     },
     { 
       validate() {
